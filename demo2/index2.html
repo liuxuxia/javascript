@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网页换肤</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 500px;
+            margin: 0 auto;
+        }
+        #btns{
+            list-style: none;
+            margin: 10px 0;
+
+        }
+        #btns li{
+            float: left;
+            width: 6px;
+            height: 6px;
+            cursor: pointer;
+            overflow: hidden;
+            text-indent: -9999px;
+            border-width: 4px;
+            border-style: solid;
+            margin-right: 20px;
+        }
+        #red{
+            background: red;
+            border-color: red;
+        }
+        #yellow{
+            background: yellow;
+            border-color: yellow;
+        }
+        #green{
+            background: green;
+            border-color: green;
+        }
+        .clear{
+            clear: both;
+        }
+        #nav {
+            margin-top: 20px;
+            width: 500px;
+            height: 25px;
+            background: green;
+            border: 1px solid #fff;
+        }
+        #nav li {
+            float: left;
+            width: 82px;
+            line-height: 25px;
+            text-align: center;
+            border-right: 1px solid #fff;
+            list-style: none;
+
+        }
+        #nav li a{
+            text-decoration: none;
+            color: #333;
+
+        }
+        #nav li.last {
+            width: 83px;
+            border-right-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul id="btns">
+            <li id="red" title="红色" class>红</li>
+            <li id="yellow" title="黄色" class="current">黄</li>
+            <li id="green" title="绿色" class>绿</li>
+        </ul>
+        <div class="clear"></div>
+        <ul id="nav">
+            <li><a href="javascript:;">新闻</a></li>
+            <li><a href="javascript:;">娱乐</a></li>
+            <li><a href="javascript:;">电影</a></li>
+            <li><a href="javascript:;">体育</a></li>
+            <li><a href="javascript:;">音乐</a></li>
+            <li class="last"><a href="javascript:;">旅游</a></li>
+        </ul>
+    </div>
+    <script>
+        var red=document.getElementById("red");
+        var yellow=document.getElementById("yellow");
+        var green=document.getElementById("green");
+        var btns=document.getElementById("btns");
+        var nav=document.getElementById("nav");
+
+        red.onclick=function(){
+            red.className="current";
+            nav.style.background="#f00";
+            document.body.style.background="#0f0";
+        }
+        yellow.onclick=function(){
+            yellow.className="current";
+            nav.style.background="#00f";
+            document.body.style.background="#f0f";
+        }
+        green.onclick=function(){
+            green.className="current";
+            nav.style.background="#0f0";
+            document.body.style.background="#00f";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数接收参数并传参</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 500px;
+            margin: 10px auto;
+        }
+        p{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p><input type="text" value="北京市"></p>
+        <p><input type="text" value="海淀区"></p>
+        <p><button>传参</button></p>
+    </div>
+    <script>
+
+        var fn = function(city, hometown)
+        {
+            alert(city.value);
+            alert(hometown.value)
+        };
+        window.onload = function ()
+        {
+            var input = document.getElementsByTagName("input");
+            var btn = document.getElementsByTagName("button")[0];
+            btn.onclick = function()
+            {
+                fn(input[0],input[1])
+            }
+        };
+
+    </script>
+</body>
+</html>
