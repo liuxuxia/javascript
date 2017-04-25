@@ -1,0 +1,48 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>百度输入法</title>
+    <style>
+        *{margin:0;padding:0;}
+        body{font:12px/1.5 Tahoma;}
+        ul{list-style-type:none;}
+        button{cursor:pointer;}
+        #box{width:70px;margin:10px auto;}
+        #word{margin-top:5px;background:#fff;border:1px solid #9a99ff;display:none;}
+        #word li{width:100%;line-height:24px;display:inline-block;vertical-align:top;}
+        #close{border-top:1px solid #9a99ff;}
+        #word li a{color:#00c;padding:0 5px;display:block;text-decoration:none;}
+        #word li a:hover{background:#d9e1f6;}
+    </style>
+
+</head>
+<body>
+<div id="box">
+    <button>输入法</button>
+    <ul id="word">
+        <li><a href="javascript:;">手写</a></li>
+        <li><a href="javascript:;">拼音</a></li>
+        <li id="close"><a href="javascript:;">关闭</a></li>
+    </ul>
+</div>
+<script>
+    window.onload = function ()
+    {
+        var btn = document.getElementsByTagName("button")[0];
+        var word = document.getElementById("word");
+        var close = document.getElementById("close");
+        var style = word.style;
+        btn.onclick = function()
+        {
+            style.display = style.display == "block" ? "none" : "block"
+        };
+        close.onclick = function()
+        {
+            style.display = "none"
+        }
+    }
+</script>
+</body>
+</html>

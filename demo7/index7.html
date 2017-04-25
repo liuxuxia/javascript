@@ -1,0 +1,85 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>单一按钮显示/隐藏</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    body{
+        font:12px/1.5 Tahoma;
+    }
+    ul{
+        list-style-type:none;
+    }
+    #box{
+        width:200px;
+        border:1px solid #aaa;
+        margin:10px auto;
+    }
+    #box h2{
+        cursor:pointer;
+        color:#57646E;
+        font-size:14px;
+        font-weight:400;
+        border:1px solid;
+        height:30px;
+        line-height:30px;
+        padding-left:10px;
+        border-color:#fff #e9edf2;
+    }
+    #box h2.open{
+        background-position:
+        180px -12px;
+    }
+    #box ul{
+        border-top:
+        1px solid #DEE3E6;
+    }
+    #box li{
+        height:25px;
+        line-height:25px;
+        vertical-align:top;
+    }
+    #box a{
+        display:block;
+        color:#6b7980;
+        background:#e9edf2;
+        text-decoration:none;
+        padding:0 10px;
+    }
+    #box a:hover{
+        background:#fff;
+        text-decoration:underline;
+    }
+</style>
+<script>
+    window.onload = function ()
+    {
+        var h2 = document.getElementsByTagName("h2")[0];
+        var ul = document.getElementsByTagName("ul")[0];
+        h2.onclick = function ()
+        {
+            var style = ul.style;
+            style.display = style.display == "none" ? "block" : "none";
+            h2.className = style.display == "none" ? "open" : ""
+        }
+    }
+</script>
+<body>
+<div id="box">
+    <h2>组员列表...</h2>
+    <ul>
+        <li><a href="javascript:;">李东涛</a></li>
+        <li><a href="javascript:;">黄玉竹</a></li>
+        <li><a href="javascript:;">刘旭霞</a></li>
+        <li><a href="javascript:;">聂启业</a></li>
+        <li><a href="javascript:;">王迎</a></li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>简易选项卡</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:450px;
+            margin:10px auto;
+        }
+        #tab{
+            overflow:hidden;
+            zoom:1;
+            background:#000;
+            border:1px solid #000;
+        }
+        #tab li{
+            float:left;
+            color:#fff;
+            height:30px;
+            cursor:pointer;
+            line-height:30px;
+            list-style-type:none;
+            padding:0 20px;
+        }
+        #tab li.current{
+            color:#000;
+            background:#ccc;
+        }
+        #content{
+            border:1px solid #000;
+            border-top-width:0;
+        }
+        #content ul{
+            line-height:25px;
+            display:none;
+            margin:0 30px;
+            padding:10px 0;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul id="tab">
+        <li class="current">第一课</li>
+        <li>第二课</li>
+        <li>第三课</li>
+    </ul>
+    <div id="content">
+        <ul style="display:block;">
+            <li>111111111111</li>
+            <li>111111111111</li>
+            <li>111111111111</li>
+            <li>111111111111</li>
+            <li>111111111111</li>
+            <li>111111111111</li>
+            <li>111111111111</li>
+            <li>111111111111</li>
+            <li>111111111111</li>
+        </ul>
+        <ul>
+            <li>222222222222</li>
+            <li>222222222222</li>
+            <li>222222222222</li>
+            <li>222222222222</li>
+            <li>222222222222</li>
+            <li>222222222222</li>
+            <li>222222222222</li>
+            <li>222222222222</li>
+            <li>222222222222</li>
+            <li>222222222222</li>
+            <li>222222222222</li>
+            <li>222222222222</li>
+            <li>222222222222</li>
+        </ul>
+        <ul>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+            <li>3333333333333</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    window.onload = function ()
+    {
+        var li = document.getElementById("tab").getElementsByTagName("li");
+        var ul = document.getElementById("content").getElementsByTagName("ul");
+
+        for(var i = 0; i < li.length; i++)
+        {
+            li[i].index = i;
+            li[i].onmouseover = function ()
+            {
+                for(var n = 0; n < li.length; n++) li[n].className="";
+                this.className = "current";
+                for(var n = 0; n < ul.length; n++) ul[n].style.display = "none";
+                ul[this.index].style.display = "block"
+            }
+        }
+    }
+</script>
+</body>
+</html>
