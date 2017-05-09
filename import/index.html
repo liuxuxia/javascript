@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详解js和jquery里的this关键字</title>
+</head>
+<body>
+
+    <script>
+//        js中的this
+//        this永远指向函数运行时所在的对象！而不是函数被创建时所在的对象。
+//        this对象是在运行时基于函数的执行环境绑定的，在全局环境中，this等于window
+        var fullname = "liming";
+        var person = {
+            fullname : 'Jack',
+            prop:{
+                fullname : 'Alina',
+                getFullname : function () {
+                    return this.fullname;
+                }
+            }
+        };
+
+        console.log(person.prop.getFullname());//Alina
+        var test = person.prop.getFullname;
+        console.log(test());//liming
+//        当getFullname被分配到test变量时，上下文指的是全局对象（window）。这是因为test是被隐式设置为全局对象的属性。
+//        出于这个原因，该函数返回window的fullname，所以在这里 this 指的是window， 所以返回的是第一个fullname
+
+
+
+//        this 关键字通常在对象的 构造函数中使用，用来引用对象。
+//        关键字this：总是指向调用该方法的对象，如：
+
+        var iCar = new Object();
+        iCar.color = "red";
+        iCar.showColor = function(){
+            alert(this.color);//输出"red"
+        };
+//        关键字this用在对象的showColor()方法中，在此环境，this等于iCar
+//        使用this是因为在实例化对象时，总是不能确定开发者会使用什么样的变量名。使用this，即可在任意多个地方重用同一个函数。
+        function showColor(){
+            alert(this.color);
+        }
+        var oCar1 = new Object;
+        oCar1.color = "red";
+        oCar1.showColor = showColor;
+
+        var oCar2 = new Object;
+        oCar2.color = "blue";
+        oCar2.showcolor = showcolor;
+
+        oCar1.showColor();//输出"red"
+       oCar2.showColor();//输出"blue"
+//        这段代码中，首先用this定义函数showColor()，然后创建两个对象oCar1和oCar2，一个对象属性被设置为"red",另一个为blue；
+//        两个对象都被赋予了属性showColor，指向原始的showColor()函数，调用每个showColor的方法，oCar1输出red，oCar2输出blue。
+
+
+        //引用对象属性时，必须使用this关键字。
+
+
+
+    <!--作为构造函数调用-->
+    <!--所谓构造函数，就是通过这个函数生成一个新对象（object）。这时，this就指这个新对象。-->
+
+
+        function test(){
+            this.x = 10;
+        }
+        var obj = new test();
+        alert(obj.x); //弹出 10；
+
+
+
+        //全局环境中的this
+        var name = "全局";
+        function getName(){
+            var name = "局部";
+            return this.name;
+        };
+        alert(getName());//弹出 全局；
+//        函数getName()所处的对象是window对象，因此this也一定在window对象中。
+//        此时的this指向window对象，所以getName()返回的this.name其实是window.name，因此alert出全局。
+//        结论：无论this身处何处，一定要找到函数运行时（或者说在何处被调用 了）的位置。
+
+
+
+
+        //通过不同的调用语法，改变相同函数内部this的值：
+        var foo = {
+            test:function(){
+                alert(this);
+            }
+        }
+        foo.test();//object,因为test方法在调用时属于foo对象
+        var baz = foo.test;
+        baz();//window,因为baz()被调用时属于global对象
+
+
+//        局部环境中的this
+//        看下面一个this出现在局部环境中的例子
+
+        var name = "全局";
+
+        var jubu={
+            name:"局部",
+            getName:function(){
+                return this.name;
+            }
+        };
+        alert(jubu.getName());
+//    其中this身处的函数getName不是在全局环境中，而是处在jubu环境中。无论this身处何处，一定要找到函数运行时的位置。
+//        此时函数getName运行时的位置：
+
+        //作用域链中的this
+
+            function scoping () {
+                console.log(this);
+
+                return function () {
+                    console.log(this);
+                };
+            }
+        scoping()();
+//        >>window
+//        >> window
+
+
+//        对象中的this
+//        可以在对象的任何方法中使用this来访问该对象的属性。这与用new得到的实例是不一样的。
+
+        var obj = {
+            foo: "test",
+            bar: function () {
+                console.log(this.foo);
+            }
+        };
+
+        obj.bar(); // "test"
+
+
+
+
+
+//        apply 和 call 调用以及 bind 绑定
+//        apply 和 call 调用以及 bind 绑定都是指向绑定的对象
+
+
+        var bar = {
+            value: 'huang',
+            ages: 10
+        };
+        function foo(){
+            console.log(this);
+        }
+        console.log(foo());//window,函数没有所属对象：指向全局对象
+        console.log(foo.apply(bar));//即bar.foo()，this指向了bar,所以能读取该对象的所有属性
+        console.log(foo.call(bar));//ages: 10  value: "huang" __proto__: Object
+
+        var newFoo = foo.bind(bar);
+        console.log(newFoo());//Object
+
+
+
+//        jquery中的this
+//        $()生成的是什么呢？实际上$()=jquery()，那么也就是说返回的是一个jquery的对象。
+//        $(this)是jquery对象，能调用jquery的方法，例如click(), keyup()。
+
+        $(function () {
+            $('button').click(function () {
+                alert(this);//this 表示原生的DOM
+                //$(this)表示当前对象，这里指的是button
+            })
+        });
+
+//        在许多情况下JQuery的this都指向HTML元素节点。
+//        结论：
+//        this，表示当前的上下文对象是一个html DOM对象，可以调用html对象所拥有的属性，方法。
+//        $(this),代表的上下文对象是一个jquery的上下文对象，可以调用jquery的方法和属性值。
+
+    </script>
+</body>
+</html>
